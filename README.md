@@ -56,3 +56,4 @@ LightSearch Updater - Сервис обновления мобильного п�
 - [Spring Security](https://github.com/spring-projects/spring-security)
 - [TestNG](https://testng.org/doc/)
 - [Vaadin](https://github.com/vaadin/)
+- [JUnit 5](https://junit.org/junit5/)
