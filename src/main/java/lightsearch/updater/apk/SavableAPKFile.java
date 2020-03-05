@@ -29,18 +29,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Component("apkFile")
+@Component("savableAPKFile")
 @Scope("prototype")
-public class APKFile implements APKWithSave {
+public class SavableAPKFile implements SavableAPK {
 
     private final APK apk;
     private final InputStream inputStream;
-    private final Directory releasesDirectory;
+    private final Directory<String> releasesDirectory;
 
-    public APKFile(
+    public SavableAPKFile(
             APK apk,
             InputStream inputStream,
-            Directory releasesDirectory) {
+            Directory<String> releasesDirectory) {
         this.apk = apk;
         this.inputStream = inputStream;
         this.releasesDirectory = releasesDirectory;
@@ -51,7 +51,7 @@ public class APKFile implements APKWithSave {
         try {
             byte[] content = IOUtils.toByteArray(inputStream);
             Path apkPath = Paths.get(
-                    releasesDirectory.path() + File.separator + apk.version() + File.separator + apk.name());
+                    releasesDirectory.name() + File.separator + apk.version() + File.separator + apk.name());
             Files.write(apkPath, content);
         } catch (IOException ex) {
             throw new APKException(ex.getMessage());

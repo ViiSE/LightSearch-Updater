@@ -17,5 +17,5 @@
 package lightsearch.updater.ui.views.main.workspace.version;
 
 public interface APKVersionWorkspaceCreator {
-    APKVersionWorkspace createApkVersionWorkspace();
+    APKVersionWorkspace create();
 }

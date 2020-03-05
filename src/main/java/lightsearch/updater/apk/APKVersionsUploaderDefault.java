@@ -36,16 +36,16 @@ import java.util.stream.Collectors;
 public class APKVersionsUploaderDefault implements APKVersionsUploader {
 
     private final Logger logger = LoggerFactory.getLogger(APKVersionsUploaderDefault.class);
-    private final Directory releasesDirectory;
+    private final Directory<String> releasesDirectory;
 
-    public APKVersionsUploaderDefault(@Qualifier("releasesDirectoryDefault") Directory releasesDirectory) {
+    public APKVersionsUploaderDefault(@Qualifier("releasesDirectoryDefault") Directory<String> releasesDirectory) {
         this.releasesDirectory = releasesDirectory;
     }
 
     @Override
     public Collection<String> uploadAll() {
         try {
-            Path root = Paths.get(releasesDirectory.path());
+            Path root = Paths.get(releasesDirectory.name());
             List<Path> subFolders = Files.walk(root, 1).filter(Files::isDirectory).collect(Collectors.toList());
             logger.info("APK versions is uploaded");
             return subFolders.stream()
@@ -53,7 +53,7 @@ public class APKVersionsUploaderDefault implements APKVersionsUploader {
                     .sorted(new ComparatorStringToNumber())
                     .collect(Collectors.toList());
         } catch (IOException ex) {
-            logger.error("uploadVersions: " + ex.getMessage() + ". Create empty versions list.");
+            logger.error("uploadAll: " + ex.getMessage() + ". Create empty versions list.");
             return Collections.emptyList();
         }
     }

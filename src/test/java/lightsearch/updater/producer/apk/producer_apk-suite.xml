@@ -2,6 +2,8 @@
 
 <suite name="ProducerAPKSuite" verbose="1" >
     <test name="ProducerAPKTest" >
+        <parameter name="name" value="app-release.apk"/>
+        <parameter name="version" value="1.0"/>
         <packages>
             <package name="lightsearch.updater.producer.apk"/>
         </packages>

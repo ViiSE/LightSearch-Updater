@@ -2,8 +2,14 @@
 
 <suite name="OSSuite" verbose="1" >
     <test name="OSTest" >
-        <packages>
-            <package name="lightsearch.updater.os"/>
-        </packages>
+        <classes>
+            <class name="lightsearch.updater.os.CurrentDirectoryFromFileTestNG"/>
+            <class name="lightsearch.updater.os.InfoDirectoryDefaultTestNG"/>
+            <class name="lightsearch.updater.os.InfoDirectoryWindowsTestNG"/>
+            <class name="lightsearch.updater.os.ReleasesDirectoryDefaultTestNG"/>
+            <class name="lightsearch.updater.os.ReleasesDirectoryWindowsTestNG"/>
+            <class name="lightsearch.updater.os.ReleasesInfoPathDefaultTestNG"/>
+            <class name="lightsearch.updater.os.DefaultStorageTestNG"/>
+        </classes>
     </test>
 </suite>

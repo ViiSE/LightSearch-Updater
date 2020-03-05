@@ -22,11 +22,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("filesWorkspaceCreatorDefault")
-public class FilesWorkspaceCreatorDefaultImpl implements FilesWorkspaceCreator {
+public class FilesWorkspaceCreatorDefault implements FilesWorkspaceCreator {
 
     private final ReleaseInfo<String> info;
 
-    public FilesWorkspaceCreatorDefaultImpl(@Qualifier("releaseInfoWithLoggerLikeString") ReleaseInfo<String> info) {
+    public FilesWorkspaceCreatorDefault(@Qualifier("releaseInfoWithLoggerLikeString") ReleaseInfo<String> info) {
         this.info = info;
     }
 

@@ -17,5 +17,5 @@
 package lightsearch.updater.ui.views.main.workspace.file;
 
 public interface FilesWorkspaceCreator {
-    FilesWorkspace createFilesWorkspace();
+    FilesWorkspace create();
 }

@@ -19,24 +19,19 @@ package lightsearch.updater.ui.views.main.workspace.version;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
-import lightsearch.updater.apk.APK;
-
-import java.io.IOException;
+import lightsearch.updater.constants.StorageValues;
+import lightsearch.updater.os.Storage;
 
 public class UploadAPK extends Upload {
 
-    public UploadAPK(APK apk, MemoryBuffer memoryBuffer) {
+    public UploadAPK(Storage storage, MemoryBuffer memoryBuffer) {
         super(memoryBuffer);
         super.setWidth("90%");
         super.setAcceptedFileTypes(".apk");
         super.addFinishedListener(event -> {
-            apk.setAPKName(event.getFileName());
-            try {
-                apk.setContent(memoryBuffer.getInputStream());
-                Notification.show("File " + event.getFileName() + " uploaded.");
-            } catch(IOException ex) {
-                Notification.show(ex.getMessage());
-            }
+            storage.save(StorageValues.APK_NAME, event.getFileName());
+            storage.save(StorageValues.APK_INPUT_STREAM, memoryBuffer.getInputStream());
+            Notification.show("File " + event.getFileName() + " uploaded.");
         });
     }
 }

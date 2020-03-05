@@ -25,11 +25,11 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 
 @Service("apkProducerDefault")
-public class APKProducerDefaultImpl implements APKProducer {
+public class APKProducerDefault implements APKProducer {
 
     private final ApplicationContext ctx;
 
-    public APKProducerDefaultImpl(ApplicationContext ctx) {
+    public APKProducerDefault(ApplicationContext ctx) {
         this.ctx = ctx;
     }
 

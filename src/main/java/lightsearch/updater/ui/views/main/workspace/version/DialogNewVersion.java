@@ -28,7 +28,9 @@ import lightsearch.updater.exception.APKException;
 public class DialogNewVersion extends Dialog {
 
     public DialogNewVersion(
-            APKVersionCreator apkVersionCreator, APKVersionsUploader apkVersionsUploader, ComboBoxVersions comboBoxVersions) {
+            APKVersionCreator apkVersionCreator,
+            APKVersionsUploader apkVersionsUploader,
+            ComboBoxVersions comboBoxVersions) {
         super();
         TextField textFieldDialog = new TextField();
         textFieldDialog.setRequired(true);
@@ -40,7 +42,7 @@ public class DialogNewVersion extends Dialog {
             if(!textFieldDialog.isEmpty()) {
                 try {
                     apkVersionCreator.createNewVersion(textFieldDialog.getValue());
-                    comboBoxVersions.setDataProvider(new ListDataProvider<>(apkVersionsUploader.uploadVersions()));
+                    comboBoxVersions.setDataProvider(new ListDataProvider<>(apkVersionsUploader.uploadAll()));
                     Notification.show("New version \"" + textFieldDialog.getValue() + "\" is created!");
                     textFieldDialog.setInvalid(false);
                     textFieldDialog.clear();

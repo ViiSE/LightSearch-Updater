@@ -21,11 +21,11 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 
 @Component("infoDirectoryWindows")
-public class InfoDirectoryWindowsImpl implements Directory<String> {
+public class InfoDirectoryWindows implements Directory<String> {
 
     private final Directory<String> currentDirectory;
 
-    public InfoDirectoryWindowsImpl(@Qualifier("currentDirectoryFromFile") Directory<String> currentDirectory) {
+    public InfoDirectoryWindows(@Qualifier("currentDirectoryFromFile") Directory<String> currentDirectory) {
         this.currentDirectory = currentDirectory;
     }
 

@@ -24,7 +24,7 @@ import java.io.File;
  * @author ViiSE
  */
 @Component("currentDirectoryFromFile")
-public class CurrentDirectoryFromFileImpl implements Directory<String> {
+public class CurrentDirectoryFromFile implements Directory<String> {
 
     @Override
     public String name() {

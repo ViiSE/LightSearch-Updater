@@ -24,11 +24,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Component("releaseInfoPathDefault")
-public class ReleaseInfoPathDefaultImpl implements Directory<Path> {
+public class ReleaseInfoPathDefault implements Directory<Path> {
 
     private final Directory<String> infoDirectory;
 
-    public ReleaseInfoPathDefaultImpl(@Qualifier("infoDirectoryDefault") Directory<String> infoDirectory) {
+    public ReleaseInfoPathDefault(@Qualifier("infoDirectoryDefault") Directory<String> infoDirectory) {
         this.infoDirectory = infoDirectory;
     }
 

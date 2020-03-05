@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("apkVersionWorkspaceCreatorDefault")
-public class APKVersionWorkspaceCreatorDefaultImpl implements APKVersionWorkspaceCreator {
+public class APKVersionWorkspaceCreatorDefault implements APKVersionWorkspaceCreator {
 
     private final APKVersionsUploader apkVersionsUploader;
     private final APKVersionCreator apkVersionCreator;
@@ -35,7 +35,7 @@ public class APKVersionWorkspaceCreatorDefaultImpl implements APKVersionWorkspac
     private final APKProducer apkProducer;
     private final Directory<String> releasesDirectory;
 
-    public APKVersionWorkspaceCreatorDefaultImpl(
+    public APKVersionWorkspaceCreatorDefault(
             APKVersionsUploader apkVersionsUploader,
             APKVersionCreator apkVersionCreator,
             Storage storage,

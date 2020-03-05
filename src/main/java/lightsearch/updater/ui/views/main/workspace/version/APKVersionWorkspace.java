@@ -22,8 +22,11 @@ import lightsearch.updater.ui.views.main.LabelWorkspace;
 public class APKVersionWorkspace extends VerticalLayout {
 
     public APKVersionWorkspace(
-            LabelWorkspace label, ComboBoxVersions comboBoxVersions, ButtonCreateNewVersion buttonCreateNewVersion,
-            UploadAPK uploadAPK, ButtonSubmitChanges buttonSubmitChanges) {
+            LabelWorkspace label,
+            ComboBoxVersions comboBoxVersions,
+            ButtonCreateNewVersion buttonCreateNewVersion,
+            UploadAPK uploadAPK,
+            ButtonSubmitChanges buttonSubmitChanges) {
         super(label, comboBoxVersions, buttonCreateNewVersion, uploadAPK, buttonSubmitChanges);
         super.getStyle().set("background-color", "#fafafa");
         super.getStyle().set("border-radius", "8px");

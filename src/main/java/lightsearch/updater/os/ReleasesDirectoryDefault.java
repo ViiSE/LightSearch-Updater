@@ -22,11 +22,11 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 
 @Component("releasesDirectoryDefault")
-public class ReleasesDirectoryDefaultImpl implements Directory<String> {
+public class ReleasesDirectoryDefault implements Directory<String> {
 
     private final Directory<String> currentDirectory;
 
-    public ReleasesDirectoryDefaultImpl(@Qualifier("currentDirectoryFromFile") Directory<String> currentDirectory) {
+    public ReleasesDirectoryDefault(@Qualifier("currentDirectoryFromFile") Directory<String> currentDirectory) {
         this.currentDirectory = currentDirectory;
     }
 

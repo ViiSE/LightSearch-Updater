@@ -17,7 +17,7 @@
 package lightsearch.updater;
 
 import lightsearch.updater.exception.ReleaseInfoException;
-import lightsearch.updater.release.info.ReleaseInfoCheckerJSONImpl;
+import lightsearch.updater.release.info.ReleaseInfoCheckerJSON;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,7 +37,7 @@ public class SandBox {
             System.out.println("EXCEPTION: " + e.toString());
         }
 
-        ReleaseInfoCheckerJSONImpl checker = new ReleaseInfoCheckerJSONImpl();
+        ReleaseInfoCheckerJSON checker = new ReleaseInfoCheckerJSON();
         try {
             checker.check(json);
         } catch (ReleaseInfoException e) {

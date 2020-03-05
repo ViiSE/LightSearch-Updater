@@ -16,13 +16,7 @@
 
 package lightsearch.updater.apk;
 
-import java.io.IOException;
-
 public interface APK {
-    void setAPKName(String name);
-    void setVersion(String version);
-    void setContent(Object stream) throws IOException;
-    String getAPKName();
-    String getVersion();
-    byte[] getContent();
+    String name();
+    String version();
 }

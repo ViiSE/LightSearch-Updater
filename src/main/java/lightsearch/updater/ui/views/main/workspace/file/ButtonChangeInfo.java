@@ -19,18 +19,16 @@ package lightsearch.updater.ui.views.main.workspace.file;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import lightsearch.updater.exception.ReleaseInfoException;
-import lightsearch.updater.release.info.ReleaseInfoChecker;
-import lightsearch.updater.release.info.ReleaseInfoSaver;
+import lightsearch.updater.release.info.ReleaseInfo;
 
 public class ButtonChangeInfo extends Button {
 
-    public ButtonChangeInfo(String text, ReleaseEditor editor, ReleaseInfoChecker infoChecker, ReleaseInfoSaver infoSaver) {
+    public ButtonChangeInfo(String text, ReleaseEditor editor, ReleaseInfo<String> info) {
         super(text);
         super.setWidth("100%");
         super.addClickListener(event -> {
             try {
-                infoChecker.check(editor.getValue());
-                infoSaver.saveInfo(editor.getValue());
+                info.save(editor.getValue());
                 Notification.show("Release information is changed!");
             } catch(ReleaseInfoException ex) {
                 Notification.show(ex.getMessage());

@@ -19,5 +19,5 @@ package lightsearch.updater.apk;
 import java.util.Collection;
 
 public interface APKVersionsUploader {
-    Collection<String> uploadVersions();
+    Collection<String> uploadAll();
 }

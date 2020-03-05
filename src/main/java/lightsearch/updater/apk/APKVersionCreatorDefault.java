@@ -30,18 +30,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Component("apkVersionCreatorDefault")
-public class APKVersionCreatorDefaultImpl implements APKVersionCreator {
+public class APKVersionCreatorDefault implements APKVersionCreator {
 
-    private final Logger logger = LoggerFactory.getLogger(APKVersionCreatorDefaultImpl.class);
-    private final Directory releasesDirectory;
+    private final Logger logger = LoggerFactory.getLogger(APKVersionCreatorDefault.class);
+    private final Directory<String> releasesDirectory;
 
-    public APKVersionCreatorDefaultImpl(@Qualifier("releasesDirectoryDefault") Directory releasesDirectory) {
+    public APKVersionCreatorDefault(@Qualifier("releasesDirectoryDefault") Directory<String> releasesDirectory) {
         this.releasesDirectory = releasesDirectory;
     }
 
     @Override
     public synchronized void createNewVersion(String versionName) throws APKException {
-        Path path = Paths.get(releasesDirectory.path() + File.separator + versionName);
+        Path path = Paths.get(releasesDirectory.name() + File.separator + versionName);
         if(Files.exists(path))
             throw new APKException("Version " + versionName + " already exists!");
         else {
@@ -49,7 +49,7 @@ public class APKVersionCreatorDefaultImpl implements APKVersionCreator {
                 Files.createDirectories(path);
                 logger.info("New version is created: " + versionName);
             } catch (IOException ex) {
-                logger.error("APKVersionCreator: createNewVersion exception: " + ex.getMessage());
+                logger.error("createNewVersion: " + ex.getMessage());
                 throw new APKException(ex.getMessage());
             }
         }

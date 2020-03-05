@@ -17,7 +17,13 @@
 package lightsearch.updater.producer.apk;
 
 import lightsearch.updater.apk.APK;
+import lightsearch.updater.apk.SavableAPK;
+import lightsearch.updater.os.Directory;
+
+import java.io.InputStream;
 
 public interface APKProducer {
-    APK getAPKDefaultInstance();
+    APK getSimpleAPKInstance(String name, String version);
+    SavableAPK getSavableAPKFileInstance(APK apk, InputStream inputStream, Directory<String> releasesDirectory);
+    SavableAPK getSavableAPKWithLoggerInstance(SavableAPK apk);
 }

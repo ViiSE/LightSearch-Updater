@@ -21,11 +21,11 @@ import com.juicy.mode.JuicyAceMode;
 import com.juicy.theme.JuicyAceTheme;
 import com.vaadin.flow.component.notification.Notification;
 import lightsearch.updater.exception.ReleaseInfoException;
-import lightsearch.updater.release.info.ReleaseInfoUploader;
+import lightsearch.updater.release.info.ReleaseInfo;
 
 public class ReleaseEditor extends JuicyAceEditor {
 
-    public ReleaseEditor(ReleaseInfoUploader infoUploader) {
+    public ReleaseEditor(ReleaseInfo<String> infoUploader) {
         super();
         super.setTheme(JuicyAceTheme.chrome);
         super.getElement().getStyle().set("border-radius", "8px");
@@ -35,7 +35,7 @@ public class ReleaseEditor extends JuicyAceEditor {
         super.setHeight("300px");
 
         try {
-            super.setValue((String)infoUploader.uploadInfo());
+            super.setValue(infoUploader.upload());
         } catch (ReleaseInfoException ex) {
             Notification.show(ex.getMessage());
         }

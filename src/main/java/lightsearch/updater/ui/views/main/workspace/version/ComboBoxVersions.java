@@ -17,18 +17,19 @@
 package lightsearch.updater.ui.views.main.workspace.version;
 
 import com.vaadin.flow.component.combobox.ComboBox;
-import lightsearch.updater.apk.APK;
 import lightsearch.updater.apk.APKVersionsUploader;
+import lightsearch.updater.constants.StorageValues;
+import lightsearch.updater.os.Storage;
 
 public class ComboBoxVersions extends ComboBox<String> {
 
-    public ComboBoxVersions(String label, APKVersionsUploader apkVersionsUploader, APK apk) {
+    public ComboBoxVersions(String label, APKVersionsUploader apkVersionsUploader, Storage storage) {
         super(label);
         super.setPreventInvalidInput(true);
         super.setWidthFull();
-        super.setItems(apkVersionsUploader.uploadVersions());
+        super.setItems(apkVersionsUploader.uploadAll());
         super.addValueChangeListener(event ->  {
-            apk.setVersion(event.getValue());
+            storage.save(StorageValues.APK_VERSION, event.getValue());
             if(!event.getValue().isEmpty())
                 super.setInvalid(false);
         });
