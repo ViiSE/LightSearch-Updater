@@ -6,8 +6,6 @@
 
     <suite-files>
         <suite-file path="producer/apk/producer_apk-suite.xml"/>
-        <suite-file path="producer/os/producer_os-suite.xml"/>
-        <suite-file path="producer/release/info/producer_release_info-suite.xml"/>
 
         <suite-file path="apk/apk-suite.xml"/>
         <suite-file path="os/os-suite.xml"/>

@@ -47,5 +47,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
                 .addResourceLocations(releasesDirectory.name());
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/app/**")
+                .addResourceLocations("classpath:/app/");
     }
 }
