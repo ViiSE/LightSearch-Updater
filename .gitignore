@@ -45,7 +45,7 @@ dist/*
 update/releases/*
 
 # Exclude releases test folder
-!update/releases/test/*
+!update/releases/test/
 
 # Update info
 update/info/*

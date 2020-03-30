@@ -5,6 +5,7 @@
     <title>LightSearch Android</title>
     <link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico">
 </head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 <style>
     .center {
@@ -16,7 +17,7 @@
         position: absolute;
         max-width: 100%;
         padding: 1em;
-        height: 40em;
+        height: 25em;
         top:0;
         bottom: 0;
         left: 0;
@@ -40,12 +41,29 @@
         font-family: 'Open Sans', serif;
         color: white;
         text-align: center;
-        font-size: 60pt;
+        font-size: 100%;
     }
-    button, center {
+
+    .cTextWelcome {
+        font-family: 'Open Sans', serif;
+        color: white;
+        text-align: center;
+        font-size: 32pt;
+        margin-bottom: 70px;
+    }
+
+    .cTextGet {
+        font-family: 'Open Sans', serif;
+        color: white;
+        text-align: center;
+        font-size: 16pt;
+        margin-bottom: 20px
+    }
+
+    button {
         background-color: white;
         font-family: 'Open Sans', serif;
-        font-size: 16pt;
+        font-size: 100%;
         color: #007dff;
         text-align: center;
         padding-top: 10px;
@@ -59,6 +77,7 @@
         box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.28);
         transition: box-shadow 0.1s linear;
         transform: translate3d(0,0,0);
+        margin-bottom: 60px
     }
 
     button:hover {
@@ -71,17 +90,56 @@
         color: white;
     }
 
+    @media screen and (min-width: 821px) {
+        .cTextWelcome {
+            font-size: 32pt;
+        }
+
+        .cTextGet {
+            font-size: 16pt;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .cTextWelcome {
+            font-size: 16pt;
+        }
+
+        .cTextGet {
+            font-size: 12pt;
+        }
+    }
+
+    @media screen and (max-width: 820px) {
+        .cTextWelcome {
+            font-size: 16pt;
+            margin-bottom: 40px;
+        }
+
+        .cTextGet {
+            font-size: 12pt;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+
+        .cBody {
+            height: 22em;
+        }
+    }
+
 </style>
 
 <body class="cBody">
 <img src="img/ls_logo_svg.svg" width="200" height="200" alt="Logo" class="center" >
-<div class="cText" style="font-size: 32pt; margin-bottom: 70px;">
+<div class="cTextWelcome">
     Добро пожаловать в проект LightSearch!
 </div>
-<div class="cText" style="font-size: 16pt; margin-bottom: 20px">
+<div class="cTextGet">
     Нажмите кнопку снизу, чтобы получить последнюю версию LightSearch Android.
 </div>
-<button class="center" style="margin-bottom: 60px" onclick="getLatestAppVersion()">
+<button class="center" onclick="getLatestAppVersion()">
     Получить
 </button>
 
