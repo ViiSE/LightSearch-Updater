@@ -44,5 +44,8 @@ dist/*
 # Update releases dirs and files
 update/releases/*
 
+# Exclude releases test folder
+!update/releases/test/*
+
 # Update info
 update/info/*

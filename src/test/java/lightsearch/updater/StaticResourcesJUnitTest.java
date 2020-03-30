@@ -57,19 +57,19 @@ public class StaticResourcesJUnitTest {
 
     @Test
     public void testGetVersionReleaseOK() throws Exception {
-        mockMvc.perform(get("/update/releases/v1.0/apk-release.apk").contentType(MediaType.ALL))
+        mockMvc.perform(get("/update/releases/test/v1.0/app-release.fakeapk").contentType(MediaType.ALL))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetVersionReleaseNotFound() throws Exception {
-        mockMvc.perform(get("/update/releases/v1.3/apk-release.apk").contentType(MediaType.ALL))
+        mockMvc.perform(get("/update/releases/v1.3/app-release.apk").contentType(MediaType.ALL))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testGetReleaseNotFound() throws Exception {
-        mockMvc.perform(get("/update/releases/v1.1/apk-release.apk").contentType(MediaType.ALL))
+        mockMvc.perform(get("/update/releases/v1.1/app-release.apk").contentType(MediaType.ALL))
                 .andExpect(status().isNotFound());
     }
 
