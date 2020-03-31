@@ -37,12 +37,6 @@
             opacity:1;
         }
     }
-    .cText {
-        font-family: 'Open Sans', serif;
-        color: white;
-        text-align: center;
-        font-size: 100%;
-    }
 
     .cTextWelcome {
         font-family: 'Open Sans', serif;
@@ -66,28 +60,19 @@
         font-size: 100%;
         color: #007dff;
         text-align: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding: 10px 30px;
         border: none;
         border-radius: 10px;
         -moz-border-radius: 10px;
         -webkit-border-radius: 10px;
         box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.28);
-        transition: box-shadow 0.1s linear;
+        transition: all 0.1s linear;
         transform: translate3d(0,0,0);
         margin-bottom: 60px
     }
 
     button:hover {
         box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.32);
-    }
-
-    button:disabled,
-    button[disabled]{
-        background-color: #77B9FF;
-        color: white;
     }
 
     @media screen and (min-width: 821px) {
@@ -128,7 +113,6 @@
             height: 22em;
         }
     }
-
 </style>
 
 <body class="cBody">
@@ -139,15 +123,34 @@
 <div class="cTextGet">
     Нажмите кнопку снизу, чтобы получить последнюю версию LightSearch Android.
 </div>
-<button class="center" onclick="getLatestAppVersion()">
-    Получить
+<button id="getBtn" class="center" onclick="getLatestAppVersion()">
+    <a id="getBtnTxt">Получить</a>
+    <img id="imgSpinner" style="display: none; margin-left: auto; margin-right: auto; " src="img/spinner.svg" alt="load..."/>
 </button>
 
 <script crossorigin>
+    function loadOn() {
+        document.getElementById("imgSpinner").style.display = "block";
+        document.getElementById("imgSpinner").style.animation = "fadeIn ease 1500ms";
+        document.getElementById("imgSpinner").style.transition = "all 0.1s linear";
+        document.getElementById("getBtnTxt").innerHTML = "Идет загрузка...";
+        document.getElementById("getBtn").disabled = true;
+    }
+
+    function loadOff() {
+        document.getElementById("imgSpinner").style.display = "none";
+        document.getElementById("getBtnTxt").innerHTML = "Получить";
+        document.getElementById("getBtn").disabled = false;
+    }
+
     function getLatestAppVersion() {
+        loadOn();
         fetch("versions/latest")
-            .then((response) => {return response.blob();})
-            .then((data) => { console.log(data); saveByteArray("app-release.apk", data) })
+            .then((response) => { return response.blob(); })
+            .then((data) => {
+                saveByteArray("app-release.apk", data);
+                loadOff();
+            });
     }
 
     function saveByteArray(reportName, byte) {
