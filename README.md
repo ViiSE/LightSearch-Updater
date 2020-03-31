@@ -48,7 +48,8 @@ LightSearch Updater - Сервис обновления мобильного п�
 По точке /app доступна возможность скачать последний релиз [LightSearch Android](https://github.com/ViiSE/LightSearch-Android).
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/43209824/78009695-c23ee300-7384-11ea-8ec1-e260b6b95549.jpg">
+<img src="https://user-images.githubusercontent.com/43209824/78009695-c23ee300-7384-11ea-8ec1-e260b6b95549.jpg"
+     width="240" height="480">
 </p>
 
 Ссылки
