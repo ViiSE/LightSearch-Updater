@@ -146,7 +146,7 @@
     function getLatestAppVersion() {
         loadOn();
         fetch("versions/latest")
-            .then((response) => { return response.blob(); })
+            .then((response) => { return response.arrayBuffer(); })
             .then((data) => {
                 saveByteArray("app-release.apk", data);
                 loadOff();
