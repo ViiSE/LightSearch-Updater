@@ -127,30 +127,41 @@
     <a id="getBtnTxt">Получить</a>
     <img id="imgSpinner" style="display: none; margin-left: auto; margin-right: auto; " src="img/spinner.svg" alt="load..."/>
 </button>
+<button id="docBtn" class="center" onclick="getDoc()">
+    <a id="docBtnTxt">Документация</a>
+</button>
 
 <script crossorigin>
-    function loadOn() {
-        document.getElementById("imgSpinner").style.display = "block";
-        document.getElementById("imgSpinner").style.animation = "fadeIn ease 1500ms";
-        document.getElementById("imgSpinner").style.transition = "all 0.1s linear";
-        document.getElementById("getBtnTxt").innerHTML = "Идет загрузка...";
-        document.getElementById("getBtn").disabled = true;
+
+    function loadOn(spinnerId, btnId, btxTxtId) {
+        document.getElementById(spinnerId).style.display = "block";
+        document.getElementById(spinnerId).style.animation = "fadeIn ease 1500ms";
+        document.getElementById(spinnerId).style.transition = "all 0.1s linear";
+        document.getElementById(btxTxtId).innerHTML = "Идет загрузка...";
+        document.getElementById(btnId).disabled = true;
     }
 
-    function loadOff() {
-        document.getElementById("imgSpinner").style.display = "none";
-        document.getElementById("getBtnTxt").innerHTML = "Получить";
-        document.getElementById("getBtn").disabled = false;
+    function loadOff(spinnerId, btnId, btxTxtId) {
+        document.getElementById(spinnerId).style.display = "none";
+        document.getElementById(btxTxtId).innerHTML = "Получить";
+        document.getElementById(btnId).disabled = false;
     }
 
     function getLatestAppVersion() {
-        loadOn();
+        loadOn("imgSpinner", "getBtn", "getBtnTxt");
         fetch("versions/latest")
             .then((response) => { return response.arrayBuffer(); })
             .then((data) => {
                 saveByteArray("app-release.apk", data);
-                loadOff();
+                loadOff("imgSpinner", "getBtn", "getBtnTxt");
             });
+    }
+
+    function getDoc() {
+        let link = document.createElement('a');
+        link.href = "/docs/ls_manual.pdf";
+        link.download = "ls_manual.pdf";
+        link.click();
     }
 
     function saveByteArray(reportName, byte) {
