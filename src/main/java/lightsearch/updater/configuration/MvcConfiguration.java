@@ -31,12 +31,15 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     private final Directory<String> infoDirectory;
     private final Directory<String> releasesDirectory;
+    private final Directory<String> docsDirectory;
 
     public MvcConfiguration(
             @Qualifier("infoDirectoryWindows") Directory<String> infoDirectory,
-            @Qualifier("releasesDirectoryWindows") Directory<String> releasesDirectory) {
+            @Qualifier("releasesDirectoryWindows") Directory<String> releasesDirectory,
+            @Qualifier("docsDirectoryWindows") Directory<String> docsDirectory) {
         this.infoDirectory = infoDirectory;
         this.releasesDirectory = releasesDirectory;
+        this.docsDirectory = docsDirectory;
     }
 
     @Override
@@ -45,6 +48,8 @@ public class MvcConfiguration implements WebMvcConfigurer {
                 .addResourceLocations(infoDirectory.name());
         registry.addResourceHandler("/update/releases/**")
                 .addResourceLocations(releasesDirectory.name());
+        registry.addResourceHandler("/docs/**")
+                .addResourceLocations(docsDirectory.name());
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/app/**")

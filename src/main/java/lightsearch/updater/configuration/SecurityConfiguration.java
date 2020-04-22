@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/icons/**",
                 "/images/**",
 
+                "/docs/**",
+
                 "/update/info/**",
                 "/update/releases/**",
 
