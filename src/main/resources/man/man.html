@@ -16,50 +16,181 @@
         direction: ltr;
     }
 
+    .outer
+    {
+        width:100%;
+        text-align: right;
+    }
+    .inner
+    {
+        display: inline-block;
+    }
+
+    button {
+        font-size: 12px;
+        background-color: #007dff;
+        font-family: 'Open Sans', serif;
+        width: 50px;
+        height: 50px;
+        padding: 6px 0;
+        color: white;
+        text-align: center;
+        border: none;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.28);
+        transition: all 0.1s linear;
+        transform: translate3d(0,0,0);
+    }
+
+    button:disabled {
+        background-color: rgba(0, 131, 255, 0.51);
+    }
+
+    button:hover {
+        box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.32);
+    }
+
+    input[type='text'] {
+        background-color: #F2F2F2;
+        border-radius: 20px;
+        border-style: solid;
+        width: 40px;
+        text-align: center;
+        padding-inline-start: 3%;
+        padding-inline-end: 3%;
+        font-size: 10pt;
+    }
 </style>
 <body>
-<div id="pdfPages"></div>
+<canvas id="pdfPage" class="cCanvas" style="width: 100%; height: 100%"></canvas>
+<div id="outer1" class="outer" style="text-align: center; margin-top: 10px;">
+    <div class="inner" style=" font-size: 10px;">
+        стр
+    </div>
+    <div class="inner">
+        <label for="pageSelector"></label>
+        <input type="text" id="pageSelector" value="1"/>
+    </div>
+    <div id="pageCount" class="inner" style="font-family: 'Open Sans', serif; font-size: 10px; margin-left: 1px">
+    </div>
+</div>
+<div id="outer2" class="outer">
+    <div class="inner">
+        <button id="prev" disabled onClick="prev()">
+            <img id="imgPrev" src="img/arrow-left.svg" alt="prev">
+        </button>
+    </div>
+    <div class="inner">
+        <button id="next" onClick="next()">
+            <img id="imgNext" src="img/arrow-right.svg" alt="next">
+        </button>
+    </div>
+</div>
 <script src="build/pdf.js"></script>
 <script id="main">
     let fName = '/docs/ls_manual.pdf';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'build/pdf.worker.js';
     let loadingTask = pdfjsLib.getDocument(fName);
     let pdfDoc = null;
-    let pdfPages = document.getElementById("pdfPages");
-    let currPage = 1;
     let numPages = 0;
+    let currentPage = 0;
+
+    let pageSelector = document.getElementById('pageSelector');
+    pageSelector.addEventListener('keypress', function(event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+
+        let key = event.key || event.keyCode;
+
+        if (key === 'Enter' || key === 13) {
+            toPage();
+        }
+    });
 
     loadingTask.promise.then(function(pdf) {
         pdfDoc = pdf;
         numPages = pdf.numPages;
-
-        pdfDoc.getPage(1).then(renderPages);
+        document.getElementById('pageCount').append(' / ' + numPages);
+        pageSelector.value = 1;
+        document.getElementById('prev').disabled = true;
+        pdfDoc.getPage(++currentPage).then(renderPage);
     });
 
-    function renderPages(page) {
-        let scale = 4.0;
+    function renderPage(page) {
+        let scale = 2.0;
         let viewport = page.getViewport({scale: scale});
 
-        let canvasId = 'page-' + currPage;
-        let canvas = document.createElement('canvas');
-        canvas.className = "cCanvas";
-        canvas.id = canvasId;
-        pdfPages.appendChild(canvas);
+        let canvas = document.getElementById('pdfPage');
         let context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
 
         let renderContext = {
             canvasContext: context,
             viewport: viewport,
         };
         page.render(renderContext);
+    }
 
-        currPage++;
-        if (pdfDoc != null && currPage <= numPages) {
-            pdfDoc.getPage(currPage).then(renderPages);
+    function next() {
+        ++currentPage;
+        if(currentPage >= numPages) {
+            document.getElementById('next').disabled = true;
+            if(currentPage === numPages) {
+                pdfDoc.getPage(currentPage).then(renderPage);
+            } else if(currentPage > numPages) {
+                currentPage = numPages;
+            }
+        } else {
+            document.getElementById('prev').disabled = false;
+            pdfDoc.getPage(currentPage).then(renderPage);
+        }
+        pageSelector.value = currentPage;
+    }
+
+    function prev() {
+        --currentPage;
+        if(currentPage <= 1) {
+            document.getElementById('prev').disabled = true;
+            if(currentPage === 1) {
+                pdfDoc.getPage(currentPage).then(renderPage);
+            } else if(currentPage < 1) {
+                currentPage = 1;
+            }
+        } else {
+            document.getElementById('next').disabled = false;
+            pdfDoc.getPage(currentPage).then(renderPage);
+        }
+        pageSelector.value = currentPage;
+    }
+
+    function toPage() {
+        if(isNaN(pageSelector.value))
+            return;
+
+        let pageNumb = parseInt(pageSelector.value);
+        console.log(pageNumb);
+
+        if(pageNumb >= numPages) {
+            pageSelector.value = numPages;
+            document.getElementById('prev').disabled = false;
+            document.getElementById('next').disabled = true;
+            currentPage = numPages;
+            pdfDoc.getPage(numPages).then(renderPage);
+        } else if (pageNumb <= 1) {
+            pageSelector.value = 1;
+            document.getElementById('prev').disabled = true;
+            document.getElementById('next').disabled = false;
+            currentPage = 1;
+            pdfDoc.getPage(1).then(renderPage);
+        } else {
+            currentPage = pageNumb;
+            pdfDoc.getPage(pageNumb).then(renderPage);
+            document.getElementById('prev').disabled = false;
+            document.getElementById('next').disabled = false;
         }
     }
 </script>
