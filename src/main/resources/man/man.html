@@ -28,6 +28,7 @@
 
     button {
         font-size: 12px;
+        outline: none;
         background-color: #007dff;
         font-family: 'Open Sans', serif;
         width: 50px;
@@ -90,7 +91,7 @@
 </div>
 <script src="build/pdf.js"></script>
 <script id="main">
-    let fName = '/docs/ls_manual.pdf';
+    let fName = '/docs/ls_manual_light.pdf';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'build/pdf.worker.js';
     let loadingTask = pdfjsLib.getDocument(fName);
     let pdfDoc = null;
