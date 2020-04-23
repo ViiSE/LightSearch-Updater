@@ -66,3 +66,4 @@ LightSearch Updater - Сервис обновления мобильного п�
 - [TestNG](https://testng.org/doc/)
 - [Vaadin](https://github.com/vaadin/)
 - [JUnit 5](https://junit.org/junit5/)
+- [PDF.js](https://mozilla.github.io/pdf.js/)
