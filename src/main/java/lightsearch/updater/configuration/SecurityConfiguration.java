@@ -62,6 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/app",
                 "/app/versions/latest/**",
 
+                "/man/**",
+                "/man",
+
                 "/frontend-es5/**", "/frontend-es6/**");
     }
 

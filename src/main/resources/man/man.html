@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>LightSearch User Manual</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .cCanvas {
+        box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.28);
+        border-collapse: separate;
+        border-spacing: 0;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        direction: ltr;
+    }
+
+</style>
+<body>
+<div id="pdfPages"></div>
+<script src="build/pdf.js"></script>
+<script id="main">
+    let fName = '/docs/ls_manual.pdf';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'build/pdf.worker.js';
+    let loadingTask = pdfjsLib.getDocument(fName);
+    let pdfDoc = null;
+    let pdfPages = document.getElementById("pdfPages");
+    let currPage = 1;
+    let numPages = 0;
+
+    loadingTask.promise.then(function(pdf) {
+        pdfDoc = pdf;
+        numPages = pdf.numPages;
+
+        pdfDoc.getPage(1).then(renderPages);
+    });
+
+    function renderPages(page) {
+        let scale = 4.0;
+        let viewport = page.getViewport({scale: scale});
+
+        let canvasId = 'page-' + currPage;
+        let canvas = document.createElement('canvas');
+        canvas.className = "cCanvas";
+        canvas.id = canvasId;
+        pdfPages.appendChild(canvas);
+        let context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+
+        let renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+        };
+        page.render(renderContext);
+
+        currPage++;
+        if (pdfDoc != null && currPage <= numPages) {
+            pdfDoc.getPage(currPage).then(renderPages);
+        }
+    }
+</script>
+</body>
+</html>
